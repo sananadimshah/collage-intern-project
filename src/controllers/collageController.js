@@ -20,26 +20,18 @@ const createCollege = async (req, res) => {
         msg: `This name already exits please take another name`,
       });
     }
-    const newCollege = await College.create({
-      name: name,
-      fullName: fullName,
-      logoLink: logoLink,
-      // Assuming other fields might exist in your College model
-      // Add them here as necessary
-    });
-
-    console.log("New College created:", newCollege); // Log the newly created college
-
-    return res.status(201).send(newCollege); // 201 for successful creation
+    const newCollege = await College.create(req.body);
+    return res.status(201).send({ status: true, Data: newCollege });
   } catch (err) {
-    console.error("Error creating college:", err); // Log any error that occurs
     return res.status(500).send({ status: false, msg: err.message });
   }
 };
 
 const collegeDetails = async (req, res) => {
   try {
-  } catch (error) {}
+  } catch (err) {
+    return res.status(500).send({ status: false, msg: err.message });
+  }
 };
 
 export { createCollege, collegeDetails };
