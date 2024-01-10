@@ -10,7 +10,7 @@ const router = express.Router();
 //******************* Collage ***************
 router.post("/colleges", createCollege);
 
-router.post("/collegeDetails", collegeDetails);
+router.get("/collegeDetails", collegeDetails);
 
 router.post("/interns", interns);
 

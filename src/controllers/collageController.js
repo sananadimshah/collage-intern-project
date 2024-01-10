@@ -1,4 +1,3 @@
-import e from "express";
 import { College } from "../models/collegeModel.js";
 
 // { name: { mandatory, unique, example iith}, fullName: {mandatory, example `Indian Institute of Technology, Hyderabad`}, logoLink: {mandatory}, isDeleted: {boolean, default: false} }
@@ -29,9 +28,29 @@ const createCollege = async (req, res) => {
 
 const collegeDetails = async (req, res) => {
   try {
+    const collegeName = req.query.collegeName;
+    if (!collegeName) {
+      return res
+        .status(400)
+        .send({ status: true, msg: "Please provide College name" });
+    }
+    const collegedetails = await College.findOne({ name: collegeName });
+
+    if (!collegedetails) {
+      return res
+        .status(404)
+        .send({ status: true, msg: "No such College exist" });
+    }
+
+    console.log(collegedetails);
+    return res.status(200).send({ status: true, Data: collegedetails });
   } catch (err) {
     return res.status(500).send({ status: false, msg: err.message });
   }
 };
+
+// - Returns the college details for the requested college (Expect a query parameter by the name `collegeName`. This is anabbreviated college name. For example `iith`)
+// - Returns the list of all interns who have applied for internship at this college.
+// - The response structure should look like [this](#college-details)
 
 export { createCollege, collegeDetails };
