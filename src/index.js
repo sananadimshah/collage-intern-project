@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(
-    "mongodb+srv://sananadimshah50:sana123@cluster1.2cylsby.mongodb.net",
+    "mongodb+srv://sananadimshah50:sana123@cluster1.2cylsby.mongodb.net/College",
     {}
   )
   .then(() => console.log("MongoDb is connected"))

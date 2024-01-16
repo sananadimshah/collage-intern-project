@@ -12,6 +12,7 @@ const collegeSchema = new Schema(
     },
     logoLink: {
       type: String,
+      required: true,
     },
     isDeleted: {
       type: Boolean,
